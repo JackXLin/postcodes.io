@@ -10,3 +10,4 @@ The **Postcodes.io Project** aims to provide easy access to geolocation data bas
 
 - **Single Postcode Lookup**: Retrieve detailed information for individual postcodes.
 - **Bulk Postcodes Lookup**: Perform bulk queries to find information on multiple postcodes.
+- **Random Postcode Lookup**: Provide a random postcode if none provided.

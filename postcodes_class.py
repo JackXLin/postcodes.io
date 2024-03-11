@@ -3,10 +3,12 @@ import json
 
 
 class Postcode:
-    def __init__(self, postcode):
+    def __init__(self, postcode=None):
         self.postcode = postcode
         self.url = f"https://api.postcodes.io/postcodes/{self.postcode}"
         self.urls = "https://api.postcodes.io/postcodes"
+        if postcode is None:
+            self.url = "https://api.postcodes.io/random/postcodes"
 
     def get_detail(self):
         response = requests.get(self.url)
@@ -26,8 +28,10 @@ class Postcode:
 
 
 class Postcodes(Postcode):
-    def __init__(self, postcode):
+    def __init__(self, postcode=None):
         super().__init__(postcode)
+        if postcode is None:
+            raise Exception("Sorry, Random postcode function not support here!")
 
     def get_detail(self):
         data = {
@@ -38,12 +42,12 @@ class Postcodes(Postcode):
         if response.status_code == 200:
             result = response.json()
             for query in result["result"]:
-                for info in query["result"]:
-                    if info in ["postcode", "primary_care_trust", "parliamentary_constituency"]:
-                        print(f"Postcode: {query["result"][info]}")
-                        # print(f"Primary Care Trust: {query["result"][info]}")
-                        # print(f"Parliamentary Constituency: {query["result"][info]}")
+                print(f"Postcode: {query["result"].get("postcode")}")
+                print(f"Primary Care Trust: {query["result"].get("primary_care_trust")}")
+                print(f"Parliamentary Constituency: {query["result"].get("parliamentary_constituency")}")
+
             return result
         else:
             print(f"Error: {response.status_code}")
+
 
