@@ -8,14 +8,6 @@ class PostcodeAPI:
         if postcode is None:
             self.url = "https://api.postcodes.io/random/postcodes"
         self.response = requests.get(self.url)
-        # if response.status_code == 200:
-        #     data = response.json()
-        #     self.postcode = data["result"]["postcode"]
-        #     self.primary_care_trust = data['result']['primary_care_trust']
-        #     self.parliamentary_constituency = data['result']['parliamentary_constituency']
-        #     self.json = data
-        # else:
-        #     print(f"Error: {response.status_code}")
 
 
 class PostcodesAPI(PostcodeAPI):
